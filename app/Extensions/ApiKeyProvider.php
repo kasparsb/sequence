@@ -3,6 +3,8 @@
 use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Contracts\Auth\Authenticatable;
 
+use \App\Models\ApiKey;
+
 class ApiKeyProvider implements UserProvider {
 
     public function retrieveById($identifier) {
@@ -23,7 +25,7 @@ class ApiKeyProvider implements UserProvider {
          * implemento šo Illuminate\Contracts\Auth\Authenticatable;
          */
 
-        $r = \App\ApiKey::with('user')->where('key', '=', $credentials['api_token'])->first();
+        $r = ApiKey::with('user')->where('key', '=', $credentials['api_token'])->first();
 
         return $r;
     }
